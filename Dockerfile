@@ -14,13 +14,14 @@ RUN cd /tmp/ && wget http://download.java.net/glassfish/4.0/release/glassfish-4.
 RUN yum -y install unzip
 
 RUN cd /tmp/ && unzip -d /opt/oracle/ glassfish-4.0.zip && rm -f glassfish-4.0.zip
-RUN cd /tmp/ && LANG=EN sh ./glassfish-4.0-unix.sh -a ... -s
+
+# RUN /opt/oracle/glassfish4/glassfish/bin/asadmin --host localhost --port 4848 enable-secure-admin
 
 ENV JAVA_HOME /opt/jdk1.7.0_75
 ENV JRE_HOME /opt/jdk1.7.0_75
 
 EXPOSE 8080 4848 8181
 
-WORKDIR /opt/oracle/glassfish4
+WORKDIR /opt/oracle/glassfish4/glassfish/bin
 
-CMD asadmin start-domain --verbose
+CMD /opt/oracle/glassfish4/glassfish/bin/asadmin start-domain
