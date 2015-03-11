@@ -25,6 +25,10 @@ echo "AS_ADMIN_PASSWORD=adminadmin" > /tmp/password.txt && \
 /opt/oracle/glassfish4/glassfish/bin/asadmin stop-domain && \
 rm /tmp/password.txt
 
+# Not needed ?
+#RUN /opt/oracle/glassfish4/glassfish/bin/asadmin create-service && \
+#echo "/etc/init.d/GlassFish_domain1 start" > /etc/profile.d/start_glassfish_domain1.sh
+
 ENV JAVA_HOME /opt/jdk1.7.0_75
 ENV JRE_HOME /opt/jdk1.7.0_75
 
@@ -33,3 +37,5 @@ EXPOSE 8080 4848 8181
 WORKDIR /opt/oracle/glassfish4/glassfish/bin
 
 CMD /opt/oracle/glassfish4/glassfish/bin/asadmin start-domain --verbose
+
+# CMD ["bash"]
