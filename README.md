@@ -6,3 +6,5 @@ docker run -d -P <image>
 
 to connect to:
 docker exec -it <container> /bin/bash
+
+have a look at http://tugrulaslan.com/?p=547

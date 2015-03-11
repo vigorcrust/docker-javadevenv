@@ -1,6 +1,11 @@
 FROM centos:6.6
 MAINTAINER "Daniel Martens" <ddmartens@gmail.com>
 
+ENV 	    JAVA_HOME 	      /opt/jdk1.7.0_75
+ENV 	    JRE_HOME 	      /opt/jdk1.7.0_75
+ENV         GLASSFISH_HOME    /opt/oracle/glassfish4/
+ENV         PATH              $PATH:$JAVA_HOME/bin:$GLASSFISH_HOME/bin
+
 RUN yum -y update; yum clean all; yum -y install wget tar unzip
 
 RUN cd /opt/ && wget --no-cookies --no-check-certificate --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/7u75-b13/jdk-7u75-linux-x64.tar.gz" && \
@@ -28,9 +33,6 @@ rm /tmp/password.txt
 # Not needed ?
 #RUN /opt/oracle/glassfish4/glassfish/bin/asadmin create-service && \
 #echo "/etc/init.d/GlassFish_domain1 start" > /etc/profile.d/start_glassfish_domain1.sh
-
-ENV JAVA_HOME /opt/jdk1.7.0_75
-ENV JRE_HOME /opt/jdk1.7.0_75
 
 EXPOSE 8080 4848 8181
 
