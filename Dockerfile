@@ -6,7 +6,7 @@ ENV 	    JRE_HOME 	      /opt/jdk1.7.0_75
 ENV         GLASSFISH_HOME    /opt/oracle/glassfish4/
 ENV         PATH              $PATH:$JAVA_HOME/bin:$GLASSFISH_HOME/bin
 
-RUN yum -y update; yum clean all; yum -y install wget tar unzip
+RUN yum -y update; yum clean all; yum -y install wget tar unzip openssh-server
 
 RUN cd /opt/ && wget --no-cookies --no-check-certificate --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/7u75-b13/jdk-7u75-linux-x64.tar.gz" && \
 tar xzf jdk-7u75-linux-x64.tar.gz && rm jdk-7u75-linux-x64.tar.gz
@@ -30,14 +30,9 @@ echo "AS_ADMIN_PASSWORD=adminadmin" > /tmp/password.txt && \
 /opt/oracle/glassfish4/glassfish/bin/asadmin stop-domain && \
 rm /tmp/password.txt
 
-# Not needed ?
-#RUN /opt/oracle/glassfish4/glassfish/bin/asadmin create-service && \
-#echo "/etc/init.d/GlassFish_domain1 start" > /etc/profile.d/start_glassfish_domain1.sh
-
 EXPOSE 8080 4848 8181
 
 WORKDIR /opt/oracle/glassfish4/glassfish/bin
 
-CMD /opt/oracle/glassfish4/glassfish/bin/asadmin start-domain --verbose
-
-# CMD ["bash"]
+CMD /opt/oracle/glassfish4/glassfish/bin/asadmin start-domain; \
+/usr/sbin/sshd -D
