@@ -1,4 +1,5 @@
 FROM centos:6.6
+
 MAINTAINER "Daniel Martens" <ddmartens@gmail.com>
 
 ENV 	    JAVA_HOME 	      /opt/jdk1.7.0_75
