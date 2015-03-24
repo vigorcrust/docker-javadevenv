@@ -7,7 +7,8 @@ RUN yum install -y libaio bc flex
 ADD oracle-xe-11.2.0-1.0.x86_64.rpm.zip /
 RUN unzip oracle-xe-11.2.0-1.0.x86_64.rpm.zip && \
     rm oracle-xe-11.2.0-1.0.x86_64.rpm.zip && \
-    rpm -ivh oracle-xe-11.2.0-1.0.x86_64.rpm
+    cd Disk1 && \
+    yum localinstall -y oracle-xe-11.2.0-1.0.x86_64.rpm
 
 RUN printf 8080\\n1521\\noracle\\noracle\\ny\\n | /etc/init.d/oracle-xe configure
 
